@@ -1,4 +1,4 @@
-export async function getImages () {
+export async function getAllProjects () {
     const allWorks = await fetch('http://localhost:5678/api/works', {
         method: 'GET',
         headers: {
@@ -8,7 +8,7 @@ export async function getImages () {
     if (allWorks.ok) {
         return await allWorks.json()
     } else {
-    throw new Error('Impossible de contacter le serveur')
+    throw new Error (`Impossible d'acceder au serveur`)
     }
 } 
 

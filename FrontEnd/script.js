@@ -1,4 +1,4 @@
-import { getImages } from "./api.js";
+import { getAllProjects } from "./api.js";
 
 
 // Function to print works from API
@@ -17,17 +17,15 @@ function printGallery (e) {
     gallery.appendChild(newElement)
 }
 
-//Images in Db
-getImages().then(body => {return body})
 //Amount of Images in Db
-getImages()
+getAllProjects()
     .then(body => {return body.length})
     .then(amountInDb => printDbImages(amountInDb))
     .catch(e => {console.log('Cant find any images', e)})
 
 function printDbImages (e) {
     for (let i = 0; i < e; i++) {
-        getImages().then(body => printGallery(body[i]))
+        getAllProjects().then(body => printGallery(body[i]))
     }
 }
 
