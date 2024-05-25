@@ -36,6 +36,10 @@ body {
 	line-height: 1;
 }
 
+a {
+	text-decoration: none;
+}
+
 ol, ul {
 	list-style: none;
 }
@@ -67,18 +71,20 @@ table {
 }
 
 body {
-	z-index: 1;
-	max-width: 950px;
-	/* padding: 0 85px; */
-	margin: auto;
-	font-family: 'Work Sans' ;
+	font-family: 'Work Sans';
 	font-size: 14px;
+}
+
+main {
+	margin: auto;
+	max-width: 950px;
 }
 
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	align-items: center;
+	margin: 50px 150px;
 }
 
 section {
@@ -107,24 +113,33 @@ h2{
 	color: var(--main-color);
 }
 
-h3{
+h3 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 16px;
 }
 
-nav ul {
+.nav-menu {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
+	gap: 44px;
 
 }
-nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+
+.insta-logo img {
+	height: 16px;
+	display: flex;
+}
+.nav-menu li {
+	font-size: 16px;
 }
 
-li:hover {
+li a {
+	color: black;
+}
+
+li a:hover {
 	color: var(--logo-color);
 }
 
@@ -199,8 +214,12 @@ li:hover {
 
 .gallery img {
 	width: 100%;
-
 }
+
+.gallery figcaption {
+	padding-top: 7px;
+}
+
 #contact {
 	width: 50%;
 	margin: auto;
@@ -247,20 +266,21 @@ input[type="submit"]{
 }
 
 .footer {
-	position: absolute;
-	left: 0;
 	display: flex;
 	justify-content: flex-end;
-	align-items: end;
+	align-items: center;
 	width: 100%;
 	background-color: white;
+	height: 60px;
 }
 
-.footer nav .mentions {
+.footer nav .mentions a {
+	display: flex;
+	color: black;
 	font-family: 'Work Sans';
 	font-size: 14px;
 	font-weight: 300;
 	background-color: white;
-	padding: 23px;
+	padding-right: 107px;
 }
 
