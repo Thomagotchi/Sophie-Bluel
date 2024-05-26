@@ -127,10 +127,14 @@ h3 {
 
 }
 
-.insta-logo img {
+.insta-logo i {
+	font-weight: 550;
 	height: 16px;
 	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+
 .nav-menu li {
 	font-size: 16px;
 }
@@ -188,6 +192,14 @@ li a:hover {
 }
 
 #tri-gallery h3 {
+	align-items: center;
+	justify-content: center;
+	color: var(--main-color);
+	transition: 0.3s ease-in-out;
+	background-color: initial;
+}
+
+#tri-gallery h3 {
 	display: flex;
 	min-width: 80px;
 	align-items: center;
@@ -198,8 +210,12 @@ li a:hover {
 	padding: 9px 10px;
 	transition: 0.3s ease-in-out;
 }
-
-#tri-gallery h3:hover, #tri-gallery h3:active {
+.active h3 {
+	color: var(--main-bg-color)!important;
+	background-color: var(--main-color)!important;
+}
+#tri-gallery h3:hover {
+	cursor: pointer;
 	color: var(--main-bg-color);
 	background-color: var(--main-color);
 }
