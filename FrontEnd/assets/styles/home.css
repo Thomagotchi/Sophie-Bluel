@@ -1,0 +1,98 @@
+#introduction {
+	display: flex;
+	gap: 72px;
+	align-items: center;
+	justify-content: center;
+}
+#introduction figure {
+	align-items: center;
+	flex: 1
+}
+
+#introduction img {
+	object-fit: cover;
+	min-width: 474px;
+	width: 100%;
+}
+
+#introduction article {
+	display: flex;
+	flex-direction: column;
+	
+	flex: 1
+}
+#introduction h2 {
+	margin-bottom: 1em;
+}
+
+#introduction p {
+	margin-bottom: 0.5em;
+}
+#portfolio h2 {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+#tri-gallery {
+	padding: 20px 0 50px 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+#tri-gallery h3 {
+	align-items: center;
+	justify-content: center;
+	color: var(--main-color);
+	transition: 0.3s ease-in-out;
+	background-color: initial;
+}
+
+#tri-gallery h3 {
+	display: flex;
+	min-width: 80px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 60px;
+	color: var(--main-color);
+	border: 1px solid var(--main-color);
+	padding: 9px 10px;
+	transition: 0.3s ease-in-out;
+}
+.active h3 {
+	color: var(--main-bg-color)!important;
+	background-color: var(--main-color)!important;
+}
+#tri-gallery h3:hover {
+	cursor: pointer;
+	color: var(--main-bg-color);
+	background-color: var(--main-color);
+}
+
+.gallery {
+	max-height: 1800px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.gallery img {
+	width: 100%;
+}
+
+.gallery figcaption {
+	padding-top: 7px;
+}
+
+
+/* Contact */
+#contact textarea {
+	border: none;
+	background-color: white;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	resize: none;
+}

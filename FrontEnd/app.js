@@ -1,5 +1,5 @@
-import { getAllProjects } from "./Functions/api.js";
-import { findFilters, printAllWorks, toggleActive, toggleInactive, removeGalleryImages, printFilteredGallery } from "./Functions/dom.js";
+import { getAllProjects } from "./assets/Functions/api.js";
+import { findFilters, printAllWorks, toggleActive, toggleInactive, removeGalleryImages, printFilteredGallery } from "./assets/Functions/dom.js";
 
 // -- ON WINDOW LOAD --
 getAllProjects()
