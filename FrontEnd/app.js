@@ -66,3 +66,14 @@ document.getElementById("tri-gallery").addEventListener("click", function(e) {
         return
     }
 })
+
+//Boutton 'se connecter'
+// export function validateLogin() {
+//     const email = document.getElementById("email")
+//     const mdp = document.getElementById("password")
+
+//     console.log(email, mdp)
+// }
+
+
+

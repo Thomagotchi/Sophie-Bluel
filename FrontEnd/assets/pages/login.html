@@ -11,7 +11,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="/FrontEnd/assets/styles/style.css">
 	<link rel="stylesheet" href="/FrontEnd/assets/styles/login.css">
-	<script src="/FrontEnd/app.js" type="module" defer></script>
+	<script src="/FrontEnd/login.js" type="module" defer></script>
 </head>
 <body>
 <header>
@@ -31,13 +31,13 @@
 	<section id="login" class="input-area">
 		<article>
 			<h2>Log In</h2>
-			<form action="#" method="post">
+			<form id="login-form">
 				<label for="email">Email</label>
 				<input type="email" name="email" id="email">
-				<label for="mdp">Mot de passe</label>
-				<input type="mdp" name="mdp" id="mdp">
-				<input type="submit" value="Se connecter">
-				<a href="#">Mot de passe oublié</a>
+				<label for="password">Mot de passe</label>
+				<input type="password" name="password" id="password">
+				<button type="submit" id="connecter">Se connecter</button>
+				<a href="#" class="mdp-oublie">Mot de passe oublié</a>
 			</form>
 		</article>
 	</section>
