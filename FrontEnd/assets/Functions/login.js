@@ -1,4 +1,4 @@
-import { printAdminModules } from "./assets/Functions/admin.js"
+import { printAdminModules } from "./admin.js"
 
 
 const loginForm = document.getElementById("login-form")
