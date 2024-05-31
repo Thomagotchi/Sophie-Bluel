@@ -67,7 +67,6 @@ table {
 }
 
 * {
-    /* background-color: red; */
 	background-color: var(--main-bg-color);
 }
 

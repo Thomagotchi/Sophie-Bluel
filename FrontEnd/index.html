@@ -14,14 +14,14 @@
 	<script src="/FrontEnd/app.js" type="module" defer></script>
 </head>
 <body>
-<header>
+<header id="header">
 	<div class="navbar">
 		<h1 class="sophie-logo">Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul class="nav-menu">
 				<li><a href="#portfolio">projets</a></li>
 				<li><a href="#contact">contact</a></li>
-				<li><a href="/FrontEnd/assets/pages/login.html">login</a></li>
+				<li id="loginLi"><a href="/FrontEnd/assets/pages/login.html" id="login">login</a></li>
 				<li class="insta-logo"><i class="fa-lg fa-brands fa-instagram"></i></li>
 			</ul>
 		</nav>
@@ -40,7 +40,9 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes projets</h2>
+		<div id="portfolio-title">
+			<h2>Mes projets</h2>
+		</div>
 		<ul id="tri-gallery">
 		</ul>
 		<div class="gallery" id="gallery">

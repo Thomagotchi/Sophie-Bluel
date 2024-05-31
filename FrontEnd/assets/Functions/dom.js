@@ -107,5 +107,4 @@ export async function findFilters(elements) {
     } else {
         console.log('Pas de projets en cours')
     }
-    console.log(eAppart, eHotel, eObjets)
 }

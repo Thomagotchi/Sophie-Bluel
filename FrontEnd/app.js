@@ -1,10 +1,22 @@
 import { getAllProjects } from "./assets/Functions/api.js";
 import { findFilters, printAllWorks, toggleActive, toggleInactive, removeGalleryImages, printFilteredGallery } from "./assets/Functions/dom.js";
+import { printAdminModules, removeAdminModules, verificationAdmin } from "./assets/Functions/admin.js";
+
 
 // -- ON WINDOW LOAD --
+window.addEventListener("load", () => {
+    verificationAdmin()
+  })
+
+// Verifier si la page est acceder par visiteurs ou admin
+ 
+
+// Afficher les categories 
 getAllProjects()
     .then(body => findFilters(body))
     .catch(e => {console.log('Cant find any categories', e)})
+
+// Afficher tout les projets
 getAllProjects()
     .then(amountInDb => printAllWorks(amountInDb))
     .catch(e => {console.log('Cant find any images', e)})
@@ -66,14 +78,6 @@ document.getElementById("tri-gallery").addEventListener("click", function(e) {
         return
     }
 })
-
-//Boutton 'se connecter'
-// export function validateLogin() {
-//     const email = document.getElementById("email")
-//     const mdp = document.getElementById("password")
-
-//     console.log(email, mdp)
-// }
 
 
 
