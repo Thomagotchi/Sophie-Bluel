@@ -1,4 +1,9 @@
 // --- VARIABLES ----
+// Portfolio
+const portfolio = document.getElementById('portfolio')
+
+// Modal 'modifier'
+const modalModifier = document.getElementById('modifierModal')
 
 //Galleries
 const gallery = document.getElementById('gallery')
@@ -77,9 +82,8 @@ export async function printFilteredGallery(elements, i) {
 }
 
 //Supprimez les filtres du DOM
-function removeGalleryFilters() {
-    gallery.querySelectorAll('*').forEach(n => n.remove())
-    console.log(triGallery.childNodes)
+export async function removeGalleryFilters() {
+    triGallery.querySelectorAll('*').forEach(n => n.remove())
 }
 
 //Fonction pour trouvez les filtres existant et les ajoutez au DOM
@@ -107,4 +111,51 @@ export async function findFilters(elements) {
     } else {
         console.log('Pas de projets en cours')
     }
+}
+
+// Créer module 'modifier'
+export async function createModuleModifier() {
+    const newAside = document.createElement('aside')
+    const modalWrapper = document.createElement('div')
+    const boutonsAction = document.createElement('div')
+    const boutonFermer = document.createElement('button')
+    const iconFermer = document.createElement('i')
+    const titreModal = document.createElement('h3')
+    const galleryDiv = document.createElement('div')
+    const seperateur = document.createElement('div')
+    const boutonAjout = document.createElement('button')
+
+    newAside.setAttribute('id', 'modifierModal')
+    newAside.setAttribute('class', 'modifierModal')
+    newAside.setAttribute('aria-hidden', 'true')
+    newAside.setAttribute('role', 'dialog')
+    newAside.setAttribute('aria-labelledby', 'titreModal')
+    modalWrapper.setAttribute('class', 'modal-wrapper')
+    boutonsAction.setAttribute('class', 'modalBoutonsAction')
+    boutonFermer.setAttribute('id', 'boutonFermer')
+    iconFermer.setAttribute('class', 'fa-solid fa-xmark')
+    titreModal.setAttribute('id', 'titreModal')
+    titreModal.innerText = 'Galerie photo'
+    galleryDiv.setAttribute('class', 'modalGallery')
+    boutonAjout.setAttribute('id', 'boutonAjout')
+    boutonAjout.innerText = 'Ajouter une photo'
+
+    boutonFermer.addEventListener('click', () => {
+        portfolio.removeChild(newAside)
+    })
+
+    boutonFermer.appendChild(iconFermer)
+    boutonsAction.appendChild(boutonFermer)
+    modalWrapper.appendChild(boutonsAction)
+    modalWrapper.appendChild(titreModal)
+    modalWrapper.appendChild(galleryDiv)
+    modalWrapper.appendChild(seperateur)
+    modalWrapper.appendChild(boutonAjout)
+    newAside.appendChild(modalWrapper)
+    portfolio.appendChild(newAside)
+}
+
+// Ouvrir module 'modifier'
+export async function openModifierModule() {
+    createModuleModifier()
 }

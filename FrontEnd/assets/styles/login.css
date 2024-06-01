@@ -29,6 +29,13 @@ button[type="submit"]:hover {
     border-bottom: 1px solid #000;
 }
 
+.input-area form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
 .mdp-oublie:hover {
     cursor: pointer;
     font-weight: bold;

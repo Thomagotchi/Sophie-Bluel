@@ -1,8 +1,8 @@
 import { getAllProjects } from "./assets/Functions/api.js";
-import { findFilters, printAllWorks, toggleActive, toggleInactive, removeGalleryImages, printFilteredGallery } from "./assets/Functions/dom.js";
+import { findFilters, printAllWorks, toggleActive, toggleInactive, removeGalleryImages, printFilteredGallery, createModuleModifier } from "./assets/Functions/dom.js";
 import { printAdminModules, removeAdminModules, verificationAdmin } from "./assets/Functions/admin.js";
 
-
+// createModuleModifier()
 // -- ON WINDOW LOAD --
 window.addEventListener("load", () => {
     verificationAdmin()

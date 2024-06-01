@@ -1,3 +1,5 @@
+import { removeGalleryFilters, findFilters, openModifierModule } from "./dom.js"
+
 const loginMenuItem = document.getElementById('loginLi')
 const portfolioTitle = document.getElementById('portfolio-title')
 const homeHeader = document.getElementById('header')
@@ -18,12 +20,14 @@ export async function removeAdminModules () {
     removeEditionHeader()
     removeFilterModificator()
     toggleLogin()
+    findFilters()
 }
 
 export async function printAdminModules () {
     printEditionHeader()
     printFilterModificator()
     toggleLogout()
+    removeGalleryFilters()
 }
 
 
@@ -34,8 +38,14 @@ function printFilterModificator() {
     const newA = document.createElement('a')
 
     newDiv.setAttribute('class', 'modifier')
+    newDiv.setAttribute('id', 'modifier')
+
     newI.setAttribute('class', 'fa-regular fa-pen-to-square')
+    newA.setAttribute('id', 'modifierButton')
     newA.innerText = 'modifier'
+    newA.addEventListener('click', (event) => {
+        openModifierModule()
+    })
 
     newDiv.appendChild(newI)
     newDiv.appendChild(newA)
