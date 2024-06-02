@@ -1,3 +1,4 @@
+import { getAllProjects } from "./api.js"
 // --- VARIABLES ----
 // Portfolio
 const portfolio = document.getElementById('portfolio')
@@ -10,6 +11,8 @@ const gallery = document.getElementById('gallery')
 const triGallery = document.getElementById('tri-gallery')
 
 // --- DOM MANIPULATION ---
+
+
 
 //Activer un filtre
 export async function toggleActive(e) {
@@ -32,12 +35,15 @@ export async function toggleInactive(e) {
 // Function to append Gallery Photos to DOM
 function printGallery(e) {
     const newElement = document.createElement('figure')
-    newElement.className = `cat-${e.category.id}`
     const elementImg = document.createElement('img')
+    const elementText = document.createElement('figcaption')
+
+    newElement.className = `cat-${e.category.id}`
+    newElement.setAttribute('id', e.id)
     elementImg.setAttribute('src', e.imageUrl)
     elementImg.setAttribute('alt', e.title)
-    const elementText = document.createElement('figcaption')
     elementText.innerText = e.title
+
     newElement.appendChild(elementImg)
     newElement.appendChild(elementText)
     gallery.appendChild(newElement)
@@ -49,10 +55,12 @@ function printFilter(e, a) {
     const newBtn = document.createElement('btn')
     const elementH3 = document.createElement('h3')
     const eId = e.split(' ')[0].toLowerCase()
+
     newBtn.setAttribute('id', eId)
     newBtn.className = a
     newLi.className = 'tri-button'
     elementH3.innerText = e
+
     newBtn.appendChild(elementH3)
     newLi.appendChild(newBtn)
     triGallery.appendChild(newLi)
@@ -75,7 +83,7 @@ export async function removeGalleryImages() {
 export async function printFilteredGallery(elements, i) {
     for (let element of elements) {
         if (element.category.id == i) {
-            printGallery(element)
+            printGallery(element, gallery)
             console.log(elements)
         } 
     }
@@ -127,22 +135,37 @@ export async function createModuleModifier() {
 
     newAside.setAttribute('id', 'modifierModal')
     newAside.setAttribute('class', 'modifierModal')
-    newAside.setAttribute('aria-hidden', 'true')
+    newAside.setAttribute('aria-hidden', 'false')
     newAside.setAttribute('role', 'dialog')
     newAside.setAttribute('aria-labelledby', 'titreModal')
     modalWrapper.setAttribute('class', 'modal-wrapper')
     boutonsAction.setAttribute('class', 'modalBoutonsAction')
     boutonFermer.setAttribute('id', 'boutonFermer')
-    iconFermer.setAttribute('class', 'fa-solid fa-xmark')
+    iconFermer.setAttribute('class', 'fa-xl fa-solid fa-xmark')
     titreModal.setAttribute('id', 'titreModal')
     titreModal.innerText = 'Galerie photo'
     galleryDiv.setAttribute('class', 'modalGallery')
+    seperateur.setAttribute('class', 'seperateur')
+
     boutonAjout.setAttribute('id', 'boutonAjout')
     boutonAjout.innerText = 'Ajouter une photo'
+
 
     boutonFermer.addEventListener('click', () => {
         portfolio.removeChild(newAside)
     })
+
+    modalWrapper.addEventListener('click', event => {
+        event.stopPropagation()
+    })
+
+    newAside.addEventListener('click', () => {
+        portfolio.removeChild(newAside)
+    })
+
+    getAllProjects()
+    .then(amountInDb => printAllWorksToModale (amountInDb, galleryDiv))
+    .catch(e => {console.log('Cant find any images', e)})
 
     boutonFermer.appendChild(iconFermer)
     boutonsAction.appendChild(boutonFermer)
@@ -158,4 +181,30 @@ export async function createModuleModifier() {
 // Ouvrir module 'modifier'
 export async function openModifierModule() {
     createModuleModifier()
+}
+
+// Function to append Photos to modale gallery
+function printModaleGallery(e, dom) {
+    const newElement = document.createElement('figure')
+    const elementImg = document.createElement('img')
+    const boutonSupprimer = document.createElement('button')
+    const iconSupprimer = document.createElement('i')
+
+    newElement.className = `modale-card`
+    newElement.setAttribute('id', e.id)
+    elementImg.setAttribute('src', e.imageUrl)
+    elementImg.setAttribute('alt', e.title)
+    iconSupprimer.setAttribute('class', 'fa-xs fa-solid fa-trash-can')
+
+    boutonSupprimer.appendChild(iconSupprimer)
+    newElement.appendChild(boutonSupprimer)
+    newElement.appendChild(elementImg)
+    dom.appendChild(newElement)
+}
+
+//Ajoutez au DOM tout les projets
+export async function printAllWorksToModale (elements, dom) {
+    for (let element of elements) {
+        printModaleGallery(element, dom)
+    }
 }

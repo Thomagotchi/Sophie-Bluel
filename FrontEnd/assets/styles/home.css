@@ -34,19 +34,14 @@
 
 #portfolio-title {
 	margin-bottom: 30px;
-	/* margin: 0 auto 30px auto; */
 	gap: 30px;
 	display: flex;
-	/* justify-content: center; */
-	/* text-align: center; */
 	align-items: center;
 }
 
 #portfolio-title h2 {
-	/* margin: 0 auto; */
 	justify-content: center;
 	margin-left: 40%;
-	/* display: absolute; */
 }
 
 #tri-gallery {
@@ -168,7 +163,120 @@
 }
 
 .modal-wrapper {
-	width: 50%;
-	min-height: 688px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 590px;
 	padding: 20px;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.modal-wrapper .seperateur {
+	border: 0.5px solid lightgrey;
+	width: 71%;
+	margin: 22px 85px 37px 85px;
+}
+
+.modalGallery {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+	grid-template-rows: repeat(auto);
+	column-gap: 10px;
+	row-gap: 30px;
+	margin: 46px 85px;
+}
+
+.modalGallery .modale-card {
+	display: flex;
+	height: 102px;
+	width: 76px;
+	object-fit: cover;
+	overflow: hidden;
+	/* justify-content: center; */
+	/* align-items: center; */
+}
+
+.modalGallery .modale-card img {
+	position: relative;
+	right: 17px;
+	top: 0;
+	display: flex;
+	z-index: 1;
+	object-fit: cover;
+}
+
+.modalGallery .modale-card button {
+	height: 17px;
+	width: 17px;
+	position: relative;
+	background-color: black;
+	color: white;
+	justify-content: center;
+	align-items: center;
+	top: 5px;
+	left: 55px;
+	border: none;
+	display: flex;
+	z-index: 2;
+	border-radius: 2px;
+}
+
+.modalGallery .modale-card button i {
+	display: flex;
+	z-index: 3;
+	background-color: black;
+	color: white;
+}
+
+.modal-wrapper .modalBoutonsAction {
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 20px;
+}
+
+.modal-wrapper #boutonFermer {
+	border: none;
+	display: flex;
+	margin-left: auto;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	font-weight: 700;
+	transition: 0.3s ease;
+}
+
+.modal-wrapper #boutonFermer:hover {
+	cursor: pointer;
+	color: var(--logo-color);
+}
+
+.modal-wrapper h3 {
+	font-family: 'Work Sans';
+	font-size: 26px;
+	font-weight: 400;
+	display: flex;
+	align-items: center;
+}
+
+.modal-wrapper #boutonAjout {
+	display: flex;
+	font-size: 14px;
+	font-family: 'Syne';
+	text-align: center;
+	border-radius: 60px ;
+	background-color: var(--main-color);
+	color: white;
+	height: 36px;
+	border: none;
+	align-items: center;
+	justify-content: center;
+	width: 237px;
+	margin-bottom: 25px;
+}
+
+.modal-wrapper #boutonAjout:hover {
+	cursor: pointer;
 }
