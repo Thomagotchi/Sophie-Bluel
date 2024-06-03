@@ -4,7 +4,7 @@ import { getAllProjects } from "./api.js"
 const portfolio = document.getElementById('portfolio')
 
 // Modal 'modifier'
-const modalModifier = document.getElementById('modifierModal')
+
 
 //Galleries
 const gallery = document.getElementById('gallery')
@@ -76,7 +76,6 @@ export async function printAllWorks(elements) {
 //Supprimez les images du DOM
 export async function removeGalleryImages() {
     gallery.querySelectorAll('*').forEach(n => n.remove())
-    console.log(gallery.childNodes)
 }
 
 // Ajoutez au DOM les projets filtrer
@@ -84,7 +83,6 @@ export async function printFilteredGallery(elements, i) {
     for (let element of elements) {
         if (element.category.id == i) {
             printGallery(element, gallery)
-            console.log(elements)
         } 
     }
 }
@@ -144,7 +142,7 @@ export async function createModuleModifier() {
     iconFermer.setAttribute('class', 'fa-xl fa-solid fa-xmark')
     titreModal.setAttribute('id', 'titreModal')
     titreModal.innerText = 'Galerie photo'
-    galleryDiv.setAttribute('class', 'modalGallery')
+    galleryDiv.setAttribute('id', 'modalGallery')
     seperateur.setAttribute('class', 'seperateur')
 
     boutonAjout.setAttribute('id', 'boutonAjout')
@@ -164,8 +162,8 @@ export async function createModuleModifier() {
     })
 
     getAllProjects()
-    .then(amountInDb => printAllWorksToModale (amountInDb, galleryDiv))
-    .catch(e => {console.log('Cant find any images', e)})
+        .then(amountInDb => printAllWorksToModale (amountInDb, galleryDiv))
+        .catch(e => {console.log('Cant find any images', e)})
 
     boutonFermer.appendChild(iconFermer)
     boutonsAction.appendChild(boutonFermer)
@@ -187,17 +185,43 @@ export async function openModifierModule() {
 function printModaleGallery(e, dom) {
     const newElement = document.createElement('figure')
     const elementImg = document.createElement('img')
-    const boutonSupprimer = document.createElement('button')
     const iconSupprimer = document.createElement('i')
 
     newElement.className = `modale-card`
     newElement.setAttribute('id', e.id)
     elementImg.setAttribute('src', e.imageUrl)
     elementImg.setAttribute('alt', e.title)
-    iconSupprimer.setAttribute('class', 'fa-xs fa-solid fa-trash-can')
+    iconSupprimer.setAttribute('class', 'fa-2xs fa-solid fa-trash-can')
 
-    boutonSupprimer.appendChild(iconSupprimer)
-    newElement.appendChild(boutonSupprimer)
+    iconSupprimer.addEventListener('click', (e) => {
+
+        const modalGallery = document.getElementById('modalGallery')
+        const modalItems = modalGallery.querySelectorAll('*')
+        const galleryItems = gallery.querySelectorAll('*')
+        let currentItem = e.target.parentNode
+        let currentItemID = currentItem.getAttribute('id')
+
+        // Delete from modale
+        for (let element of modalItems) {
+            let currentID = element.getAttribute('id')
+
+            if (currentID === currentItemID) {
+                modalGallery.removeChild(element)
+            }
+        }
+        // Delete from site gallery
+        for (let element of galleryItems) {
+            let currentID = element.getAttribute('id')
+
+            if (currentID === currentItemID) {
+                gallery.removeChild(element)
+            }
+        }
+        // Delete from backend
+        deleteItem()
+    })
+
+    newElement.appendChild(iconSupprimer)
     newElement.appendChild(elementImg)
     dom.appendChild(newElement)
 }

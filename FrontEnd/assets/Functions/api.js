@@ -12,9 +12,10 @@ export async function getAllProjects () {
     }
 } 
 
-// export async function getAllProjects () {
+// supprimeProjet()
+// export async function supprimeProjet () {
 //     const allWorks = await fetch('http://localhost:5678/api/works', {
-//         method: 'GET',
+//         method: 'DELETE',
 //         headers: {
 //             "Accept": "application/json"
 //         }

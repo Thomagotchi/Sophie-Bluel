@@ -178,7 +178,7 @@
 	margin: 22px 85px 37px 85px;
 }
 
-.modalGallery {
+#modalGallery {
 	display: grid;
 	grid-template-columns: auto auto auto auto auto;
 	grid-template-rows: repeat(auto);
@@ -187,7 +187,7 @@
 	margin: 46px 85px;
 }
 
-.modalGallery .modale-card {
+#modalGallery .modale-card {
 	display: flex;
 	height: 102px;
 	width: 76px;
@@ -197,7 +197,7 @@
 	/* align-items: center; */
 }
 
-.modalGallery .modale-card img {
+#modalGallery .modale-card img {
 	position: relative;
 	right: 17px;
 	top: 0;
@@ -206,9 +206,9 @@
 	object-fit: cover;
 }
 
-.modalGallery .modale-card button {
-	height: 17px;
-	width: 17px;
+#modalGallery .modale-card i {
+	height: 10px;
+	padding: 4px 4px;
 	position: relative;
 	background-color: black;
 	color: white;
@@ -222,18 +222,17 @@
 	border-radius: 2px;
 }
 
-.modalGallery .modale-card button i {
-	display: flex;
-	z-index: 3;
-	background-color: black;
-	color: white;
+#modalGallery .modale-card i:hover {
+	cursor: pointer;
 }
+
 
 .modal-wrapper .modalBoutonsAction {
 	width: 100%;
 	justify-content: center;
 	align-items: center;
 	padding-bottom: 20px;
+	background-color: white;
 }
 
 .modal-wrapper #boutonFermer {
@@ -246,6 +245,7 @@
 	height: 24px;
 	font-weight: 700;
 	transition: 0.3s ease;
+	background-color: white;
 }
 
 .modal-wrapper #boutonFermer:hover {
@@ -259,6 +259,7 @@
 	font-weight: 400;
 	display: flex;
 	align-items: center;
+	background-color: white;
 }
 
 .modal-wrapper #boutonAjout {

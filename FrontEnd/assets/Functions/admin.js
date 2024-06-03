@@ -7,12 +7,10 @@ const homeHeader = document.getElementById('header')
 export async function verificationAdmin () {
     const userID = sessionStorage.getItem("userID")
     const userToken = sessionStorage.getItem("token")
-     console.log(sessionStorage.getItem("userID"))
     if (userID == 1 && userToken !== null) {
         printAdminModules()
-        console.log('hello admin')
     } else {
-        console.log('not admin')
+        return
     }
 }
 
