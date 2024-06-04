@@ -1,4 +1,4 @@
-import { removeGalleryFilters, findFilters, openModifierModule } from "./dom.js"
+import { removeGalleryFilters, findFilters, createModuleModifier } from "./dom.js"
 
 const loginMenuItem = document.getElementById('loginLi')
 const portfolioTitle = document.getElementById('portfolio-title')
@@ -42,7 +42,7 @@ function printFilterModificator() {
     newA.setAttribute('id', 'modifierButton')
     newA.innerText = 'modifier'
     newA.addEventListener('click', (event) => {
-        openModifierModule()
+        createModuleModifier()
     })
 
     newDiv.appendChild(newI)

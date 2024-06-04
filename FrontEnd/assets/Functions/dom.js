@@ -1,4 +1,4 @@
-import { getAllProjects } from "./api.js"
+import { getAllProjects, supprimeProjet } from "./api.js"
 // --- VARIABLES ----
 // Portfolio
 const portfolio = document.getElementById('portfolio')
@@ -130,6 +130,7 @@ export async function createModuleModifier() {
     const galleryDiv = document.createElement('div')
     const seperateur = document.createElement('div')
     const boutonAjout = document.createElement('button')
+    const boutonSubmit = document.createElement('button')
 
     newAside.setAttribute('id', 'modifierModal')
     newAside.setAttribute('class', 'modifierModal')
@@ -148,6 +149,85 @@ export async function createModuleModifier() {
     boutonAjout.setAttribute('id', 'boutonAjout')
     boutonAjout.innerText = 'Ajouter une photo'
 
+    boutonAjout.addEventListener('click', () => {
+        const backIcon = document.createElement('i')
+        const formDiv = document.createElement('div')
+        const ajoutForm = document.createElement('form')
+        const ajoutFileInputDiv = document.createElement('div')
+        const ajoutFileInput = document.createElement('input')
+        const ajoutFileInputIcon = document.createElement('icon')
+        const ajoutFileInputButton = document.createElement('button')
+        const ajoutFileInputInfo = document.createElement('p')
+        const ajoutFileTitleLabel = document.createElement('label')
+        const ajoutFileTitle = document.createElement('input')
+        const ajoutFileCategorieLabel = document.createElement('label')
+        const ajoutFileCategorieSelect = document.createElement('select')
+        const ajoutFileSelectCat0 = document.createElement('option')
+        const ajoutFileSelectCat1 = document.createElement('option')
+        const ajoutFileSelectCat2 = document.createElement('option')
+        const ajoutFileSelectCat3 = document.createElement('option')
+
+        backIcon.setAttribute('class', 'fa-solid fa-arrow-left')
+        titreModal.innerText = 'Ajout photo'
+        formDiv.setAttribute('class', 'formDiv')
+        ajoutForm.setAttribute('id', 'ajoutForm')
+        ajoutFileInputIcon.setAttribute('class', 'fa-regular fa-image')
+        ajoutFileInputIcon.setAttribute('id', 'ajoutFileInputIcon')
+        ajoutFileInputButton.setAttribute('id', 'ajoutFileInputButton')
+        ajoutFileInputButton.innerText = '+ Ajouter photo'
+        ajoutFileInputInfo.innerText = 'jpg, png: 4mo max'
+        ajoutFileInput.setAttribute('type', 'file')
+        ajoutFileInput.setAttribute('name', 'ajoutImage')
+        ajoutFileInput.setAttribute('id', 'ajoutFileInput')
+        ajoutFileCategorieLabel.innerText = 'Catégorie'
+        ajoutFileCategorieSelect.setAttribute('id', 'categorySelect')
+        ajoutFileSelectCat1.setAttribute('value', '0')
+        ajoutFileSelectCat1.innerText = ''
+        ajoutFileSelectCat1.setAttribute('value', '1')
+        ajoutFileSelectCat1.innerText = 'Objets'
+        ajoutFileSelectCat2.setAttribute('value', '2')
+        ajoutFileSelectCat2.innerText = 'Appartements'
+        ajoutFileSelectCat3.setAttribute('value', '3')
+        ajoutFileSelectCat3.innerText = 'Hotels & restaurants'
+        ajoutFileTitleLabel.setAttribute('for', 'titre')
+        ajoutFileTitleLabel.innerText = 'Titre'
+        ajoutFileTitle.setAttribute('name', 'titre')
+        ajoutFileTitle.setAttribute('id', 'ajoutTitre')
+        boutonSubmit.setAttribute('id', 'boutonSubmit')
+        boutonSubmit.innerText = 'Valider'
+        
+        boutonSubmit.setAttribute('form', 'ajoutForm')
+        boutonSubmit.setAttribute('type', 'submit')
+        
+        boutonSubmit.addEventListener('click', () => {
+
+        })
+
+        backIcon.addEventListener('click', () => {
+            portfolio.removeChild(newAside)
+            createModuleModifier()
+        })
+        
+        modalWrapper.removeChild(galleryDiv)
+        modalWrapper.removeChild(boutonAjout)
+        boutonsAction.appendChild(backIcon)
+        ajoutFileInputDiv.appendChild(ajoutFileInput)
+        ajoutFileInputDiv.appendChild(ajoutFileInputIcon)
+        ajoutFileInputDiv.appendChild(ajoutFileInputButton)
+        ajoutFileInputDiv.appendChild(ajoutFileInputInfo)
+        ajoutFileCategorieSelect.appendChild(ajoutFileSelectCat0)
+        ajoutFileCategorieSelect.appendChild(ajoutFileSelectCat1)
+        ajoutFileCategorieSelect.appendChild(ajoutFileSelectCat2)
+        ajoutFileCategorieSelect.appendChild(ajoutFileSelectCat3)
+        formDiv.appendChild(ajoutFileInputDiv)
+        formDiv.appendChild(ajoutFileTitleLabel)
+        formDiv.appendChild(ajoutFileTitle)
+        formDiv.appendChild(ajoutFileCategorieLabel)
+        formDiv.appendChild(ajoutFileCategorieSelect)
+        formDiv.appendChild(ajoutFileInput)
+        modalWrapper.insertBefore(formDiv, seperateur)
+        modalWrapper.appendChild(boutonSubmit)
+    })
 
     boutonFermer.addEventListener('click', () => {
         portfolio.removeChild(newAside)
@@ -162,7 +242,7 @@ export async function createModuleModifier() {
     })
 
     getAllProjects()
-        .then(amountInDb => printAllWorksToModale (amountInDb, galleryDiv))
+        .then(amountInDb => printAllWorksToModale(amountInDb, galleryDiv))
         .catch(e => {console.log('Cant find any images', e)})
 
     boutonFermer.appendChild(iconFermer)
@@ -176,10 +256,7 @@ export async function createModuleModifier() {
     portfolio.appendChild(newAside)
 }
 
-// Ouvrir module 'modifier'
-export async function openModifierModule() {
-    createModuleModifier()
-}
+
 
 // Function to append Photos to modale gallery
 function printModaleGallery(e, dom) {
@@ -218,7 +295,7 @@ function printModaleGallery(e, dom) {
             }
         }
         // Delete from backend
-        deleteItem()
+        supprimeProjet(currentItemID)
     })
 
     newElement.appendChild(iconSupprimer)
