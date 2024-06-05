@@ -1,10 +1,6 @@
-import { printAdminModules } from "./admin.js"
-
-
 const loginForm = document.getElementById("login-form")
 const loginEmailInput = document.getElementById("email")
 const loginPasswordInput = document.getElementById("password")
-const isLoggedIn = 'false'
 
 loginForm.addEventListener('submit', event => {
     event.preventDefault();

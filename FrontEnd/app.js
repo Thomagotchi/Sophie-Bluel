@@ -82,17 +82,17 @@ document.getElementById("tri-gallery").addEventListener("click", function(e) {
 
 
 // const toutObjets = [
-//     {
-//         "id": 1,
-//         "title": "Abat-jour Tahina",
-//         "imageUrl": "http://localhost:5678/images/abajour-tahina1651286843956.png",
-//         "categoryId": 1,
-//         "userId": 1,
-//         "category": {
-//           "id": 1,
-//           "name": "Objets"
-//         }
-//       }
+    // {
+    //     "id": 1,
+    //     "title": "Abat-jour Tahina",
+    //     "imageUrl": "http://localhost:5678/images/abajour-tahina1651286843956.png",
+    //     "categoryId": 1,
+    //     "userId": 1,
+    //     "category": {
+    //       "id": 1,
+    //       "name": "Objets"
+    //     }
+    //   }
 //     {
 //         "id": 2,
 //         "title": "Appartement Paris V",

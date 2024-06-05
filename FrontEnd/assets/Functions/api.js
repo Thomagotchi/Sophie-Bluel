@@ -14,7 +14,7 @@ export async function getAllProjects () {
 
 export async function supprimeProjet(id) {
     const token = sessionStorage.getItem('token')
-    const res = await fetch('http://localhost:5678/api/works/' + id, {
+    const res = await fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
         headers: {
             "Authorization": `Bearer ${token}`,
@@ -27,3 +27,27 @@ export async function supprimeProjet(id) {
     throw new Error (`Impossible d'acceder au serveur`)
     }
 }
+
+export async function sendWork(formDataObject) {
+    const token = sessionStorage.getItem('token')
+
+    const res = await fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/json"
+        },
+        body: formDataObject
+    })
+    if(res.ok) {
+        console.log('you successfully sent a work')
+    } 
+}
+
+// {
+//     "id": 0,
+//     "title": "string",
+//     "imageUrl": "string",
+//     "categoryId": "string",
+//     "userId": 0
+//   }
