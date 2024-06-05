@@ -1,6 +1,5 @@
 import { getAllProjects, supprimeProjet, sendWork } from "./api.js"
 // --- VARIABLES ----
-const projectIndex = ProjectIndex()
 // Portfolio
 const portfolio = document.getElementById('portfolio')
 //Galleries
@@ -30,16 +29,16 @@ export function toggleInactive(e) {
 }
 
 // Function to append Gallery Photos to DOM
-function printGallery(e) {
+function printGallery(element) {
     const newElement = document.createElement('figure')
     const elementImg = document.createElement('img')
     const elementText = document.createElement('figcaption')
 
-    newElement.className = `cat-${e.category.id}`
-    newElement.setAttribute('id', e.id)
-    elementImg.setAttribute('src', e.imageUrl)
-    elementImg.setAttribute('alt', e.title)
-    elementText.innerText = e.title
+    newElement.className = `cat-${element.category.id}`
+    newElement.setAttribute('id', element.id)
+    elementImg.setAttribute('src', element.imageUrl)
+    elementImg.setAttribute('alt', element.title)
+    elementText.innerText = element.title
 
     newElement.appendChild(elementImg)
     newElement.appendChild(elementText)
@@ -111,13 +110,13 @@ export function findFilters(elements) {
     }
     if (eHotel > 0) {
         printFilter('Hotel & restaurants', 'inactive')
-    } else {
+    } if (eObjets === 0 && eAppart === 0 && eHotel === 0) {
         console.log('Pas de projets en cours')
     }
 }
 
 // Créer module 'modifier'
-export function createModuleModifier() {
+export async function createModuleModifier() {
     const newAside = document.createElement('aside')
     const modalWrapper = document.createElement('div')
     const actionButtons = document.createElement('div')
@@ -153,12 +152,12 @@ export function createModuleModifier() {
         portfolio.removeChild(newAside)
     })
 
-    modalWrapper.addEventListener('click', event => {
-        event.stopPropagation()
-    })
-
     newAside.addEventListener('click', () => {
         portfolio.removeChild(newAside)
+    })
+
+    modalWrapper.addEventListener('click', event => {
+        event.stopPropagation()
     })
 
     getAllProjects()
@@ -222,8 +221,6 @@ export function createModuleAjout() {
     const addForm = document.createElement('form')
     // Setting form container attributes
     addForm.setAttribute('id', 'addForm')
-    addForm.setAttribute('onsubmit', 'addForm')
-
 
     // --- CREATING FILE INPUT DIV ---
     const addFileInputDiv = document.createElement('div')
@@ -296,11 +293,17 @@ export function createModuleAjout() {
     submitButton.setAttribute('type', 'submit')
 
     // --- EVENT LISTENERS ---
-    addForm.addEventListener('submit', event => {
-        event.preventDefault();
-        
+    addForm.addEventListener('submit', (event) => {
+        event.preventDefault()
         const formData = new FormData(addForm)
+
+        // Send work to backend and refresh portfolio gallery
         sendWork(formData)
+
+        // Resets inputs in case of  bad request
+        resetInput(addFileInput)
+        resetInput(addFileTitle)
+        resetInput(addFileCategorySelect)
     })
 
     backIcon.addEventListener('click', () => {
@@ -320,6 +323,7 @@ export function createModuleAjout() {
         portfolio.removeChild(newAside)
     })
 
+    // --- APPENDING EACH ELEMENT TO DOM ---
     backButton.appendChild(backIcon)
     closeButton.appendChild(closeIcon)
     actionButtons.appendChild(backButton)
@@ -364,12 +368,12 @@ function printModaleGallery(e, dom) {
     elementImg.setAttribute('alt', e.title)
     iconSupprimer.setAttribute('class', 'fa-2xs fa-solid fa-trash-can')
 
-    iconSupprimer.addEventListener('click', (e) => {
-
+    iconSupprimer.addEventListener('click', event => {
+        
         const modalGallery = document.getElementById('modalGallery')
         const modalItems = modalGallery.querySelectorAll('*')
         const galleryItems = gallery.querySelectorAll('*')
-        let currentItem = e.target.parentNode
+        let currentItem = event.target.parentNode
         let currentItemID = currentItem.getAttribute('id')
 
         // Delete from modale
@@ -404,18 +408,10 @@ export function printAllWorksToModale (elements, dom) {
     }
 }
 
-function ProjectIndex() {
-    getAllProjects()
-    .then(body => getProjectIndex(body))
-    .catch(e => {console.log('Cant find any projects', e)})
+function printIncomplete() {
+    console.log(`Impossible de charger l'image, information manquantes.`)
 }
 
-function getProjectIndex(elements) {
-    let highestNumber = 0
-    for (let element of elements) {
-        if (element.id > highestNumber) {
-            highestNumber = element.id
-        }
-    }
-    highestNumber++
+export function resetInput(inputValue) {
+    inputValue.value = null
 }

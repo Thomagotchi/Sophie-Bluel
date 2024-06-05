@@ -1,3 +1,5 @@
+import { printAllWorks, resetInput, removeGalleryImages } from "./dom.js"
+
 export async function getAllProjects () {
     const allWorks = await fetch('http://localhost:5678/api/works', {
         method: 'GET',
@@ -28,8 +30,11 @@ export async function supprimeProjet(id) {
     }
 }
 
-export async function sendWork(formDataObject) {
+export async function sendWork(formData) {
     const token = sessionStorage.getItem('token')
+    const addFileInput = document.getElementById('addFileInput')
+    const addFileTitle = document.getElementById('addTitle') 
+    const addFileCategorySelect = document.getElementById('categorySelect')    
 
     const res = await fetch('http://localhost:5678/api/works', {
         method: 'POST',
@@ -37,17 +42,16 @@ export async function sendWork(formDataObject) {
             "Authorization": `Bearer ${token}`,
             "Accept": "application/json"
         },
-        body: formDataObject
+        body: formData
     })
     if(res.ok) {
-        console.log('you successfully sent a work')
-    } 
+        console.log('you successfully sent a project')
+        resetInput(addFileInput)
+        resetInput(addFileTitle)
+        resetInput(addFileCategorySelect)
+        removeGalleryImages()
+        getAllProjects()
+            .then(amountInDb => printAllWorks(amountInDb))
+            .catch(e => {console.log('Cant find any images', e)})
+    }
 }
-
-// {
-//     "id": 0,
-//     "title": "string",
-//     "imageUrl": "string",
-//     "categoryId": "string",
-//     "userId": 0
-//   }

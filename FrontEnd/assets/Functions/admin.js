@@ -41,7 +41,7 @@ function printFilterModificator() {
     newI.setAttribute('class', 'fa-regular fa-pen-to-square')
     newA.setAttribute('id', 'modifierButton')
     newA.innerText = 'modifier'
-    newA.addEventListener('click', (event) => {
+    newA.addEventListener('click', () => {
         createModuleModifier()
     })
 
