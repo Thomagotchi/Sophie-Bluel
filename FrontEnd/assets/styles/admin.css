@@ -1,0 +1,265 @@
+/* -- ADMIN -- */
+
+/* ADMIN HEADER */
+.adminHeader {
+	display: flex;
+	width: 100%;
+	background-color: black;
+	align-items: center;
+	gap: 12px;
+	justify-content: center;
+}
+
+.adminHeader i, .adminHeader p {
+	font-weight: 100;
+	align-items: center;
+	background-color: black;
+	display: flex;
+	color: var(--main-bg-color);
+}
+
+.adminHeader p {
+	margin: 20px 0;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+/* ADMIN MODIFIER */
+.modify {
+	display: flex;
+	gap: 10px;
+}
+
+.modify a:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+/* ADMIN MODAL MODIFIER */
+
+/* Common between both modals */
+.modifyModal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.15);
+}
+
+.modalWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 590px;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.modalWrapper .modalActionButtons {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 20px;
+	background-color: white;
+}
+
+.modalWrapper #closeButton {
+	border: none;
+	display: flex;
+	margin-left: auto;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	font-weight: 700;
+	transition: 0.3s ease;
+	background-color: white;
+}
+
+.modalWrapper .modalActionButtons i:hover {
+	cursor: pointer;
+	color: var(--logo-color);
+}
+
+.modalWrapper h3 {
+	font-family: 'Work Sans';
+	font-size: 26px;
+	font-weight: 400;
+	display: flex;
+	align-items: center;
+	background-color: white;
+}
+
+.modalWrapper .seperator {
+	border: 0.5px solid lightgrey;
+	width: 71%;
+	margin: 22px 85px 37px 85px;
+}
+
+/* Modal modifier */
+#modalGallery {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+	grid-template-rows: repeat(auto);
+	column-gap: 10px;
+	row-gap: 30px;
+	margin: 46px 85px;
+	background-color: white;
+}
+
+#modalGallery .modalCard {
+	display: flex;
+	height: 102px;
+	width: 76px;
+	object-fit: cover;
+	overflow: hidden;
+}
+
+#modalGallery .modalCard img {
+	position: relative;
+	right: 17px;
+	top: 0;
+	display: flex;
+	z-index: 1;
+	object-fit: cover;
+}
+
+#modalGallery .modalCard i {
+	height: 10px;
+	padding: 4px 4px;
+	position: relative;
+	background-color: black;
+	color: white;
+	justify-content: center;
+	align-items: center;
+	top: 5px;
+	left: 55px;
+	border: none;
+	display: flex;
+	z-index: 2;
+	border-radius: 2px;
+}
+
+#modalGallery .modalCard i:hover {
+	cursor: pointer;
+}
+
+.modalWrapper #addButton {
+	display: flex;
+	font-size: 14px;
+	font-family: 'Syne';
+	text-align: center;
+	border-radius: 60px ;
+	background-color: var(--main-color);
+	color: white;
+	height: 36px;
+	border: none;
+	align-items: center;
+	justify-content: center;
+	width: 237px;
+	margin-bottom: 25px;
+}
+
+.modalWrapper #addButton:hover {
+	cursor: pointer;
+}
+
+/* Modal Ajout Photo */
+
+.modalWrapper #backButton {
+	display: flex;
+	border: none;
+}
+
+.modalWrapper #addForm {
+	background-color: white;
+	width: 420px;
+	display: flex;
+	flex-direction: column;
+	padding: 36px;
+}
+
+.modalWrapper #addForm .fileInputDiv {
+	background-color: rgba(232, 241, 246, 1);
+	height: fit-content;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	border-radius: 3px;
+}
+
+.modalWrapper #addForm .fileInputDiv #addFileInputIcon {
+	color: rgba(185, 197, 204, 1);
+	background-color: rgba(232, 241, 246, 1);
+	margin: 15px 0 6px 0;
+}
+
+.modalWrapper #addForm #addFileInput {
+	display: none;
+}
+
+.modalWrapper #addForm .addFileInputLabel {
+	display: flex;
+	background-color: rgba(203, 214, 220, 1);
+	color: rgba(48, 102, 133, 1);
+	align-items: center;
+	justify-content: center;
+	border-radius: 50px;
+	width: 36%;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 12px;
+}
+
+.modalWrapper #addForm .addFileInputLabel:hover {
+	cursor: pointer;
+}
+
+.modalWrapper #addForm p {
+	background-color: rgba(232, 241, 246, 1);
+	font-size: 10px;
+	color: rgba(68, 68, 68, 1);
+	margin: 8px 0 20px 0;
+}
+
+.modalWrapper #addForm > label {
+	color: rgba(61, 61, 61, 1);
+	font-size: 14px;
+	font-weight: 600;
+	background-color: white;
+	margin: 30px 0 10px 0;
+}
+
+.modalWrapper #addForm #addTitle {
+	background-color: white;
+	border: none;
+	height: 51px;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+}
+
+.modalWrapper #addForm #categorySelect {
+	appearance: none;
+	background-image: url(../icons/angle-down-solid.svg);
+	background-repeat: no-repeat;
+  	background-position: right 30px top 50%;
+	background-size: 10px;
+
+	position: relative;
+	background-color: white;
+	border: none;
+	min-height: 51px;
+	font-size: 14px;
+	padding: 16px;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+}
+
+.modalWrapper #submitButton {
+	width: 237px;
+}

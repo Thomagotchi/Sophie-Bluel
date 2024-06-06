@@ -1,5 +1,6 @@
 import { printAllWorks, resetInput, removeGalleryImages } from "./dom.js"
 
+// Fonction pour récuperer tout les projéts en cours de la base de donnée 
 export async function getAllProjects () {
     const allWorks = await fetch('http://localhost:5678/api/works', {
         method: 'GET',
@@ -14,7 +15,8 @@ export async function getAllProjects () {
     }
 } 
 
-export async function supprimeProjet(id) {
+// Fonction pour supprimer un projét de la base de donnée 
+export async function deleteProject(id) {
     const token = sessionStorage.getItem('token')
     const res = await fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
@@ -30,6 +32,7 @@ export async function supprimeProjet(id) {
     }
 }
 
+// Fonction pour ajouter un projét de la base de donnée 
 export async function sendWork(formData) {
     const token = sessionStorage.getItem('token')
     const addFileInput = document.getElementById('addFileInput')

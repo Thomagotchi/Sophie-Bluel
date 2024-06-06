@@ -1,106 +1,79 @@
-import { removeGalleryFilters, findFilters, createModuleModifier } from "./dom.js"
+import { getAllProjects } from "./api.js"
+import { removeGalleryFilters, findFilters, createModuleModify } from "./dom.js"
 
-const loginMenuItem = document.getElementById('loginLi')
-const portfolioTitle = document.getElementById('portfolio-title')
+// Elements du DOM
+const loginMenuItem = document.getElementById('loginList')
+const portfolioTitle = document.getElementById('portfolioTitle')
 const homeHeader = document.getElementById('header')
 
-export async function verificationAdmin () {
+// Fonction pour verifier si utilisateur est admin
+export async function verificationAdmin() {
     const userID = sessionStorage.getItem("userID")
     const userToken = sessionStorage.getItem("token")
     if (userID == 1 && userToken !== null) {
         printAdminModules()
     } else {
-        return
+        getAllProjects()
+            .then(body => findFilters(body))
+            .catch(console.log('Pas trouver de categories'))
     }
 }
 
-export async function removeAdminModules () {
-    removeEditionHeader()
-    removeFilterModificator()
-    toggleLogin()
-    findFilters()
-}
-
-export async function printAdminModules () {
+// Fonction pour ajouter tout elements Admin
+export async function printAdminModules() {
     printEditionHeader()
-    printFilterModificator()
+    printFilterModify()
     toggleLogout()
     removeGalleryFilters()
 }
 
-
-//Function to print 'modifier' module
-function printFilterModificator() {
+// Fonction pour ajouter modal 'modifier' au DOM
+function printFilterModify() {
     const newDiv = document.createElement('div')
-    const newI = document.createElement('i')
-    const newA = document.createElement('a')
+    const newIcon = document.createElement('i')
+    const newAnchor = document.createElement('a')
 
-    newDiv.setAttribute('class', 'modifier')
-    newDiv.setAttribute('id', 'modifier')
+    newDiv.setAttribute('class', 'modify')
+    newDiv.setAttribute('id', 'modify')
 
-    newI.setAttribute('class', 'fa-regular fa-pen-to-square')
-    newA.setAttribute('id', 'modifierButton')
-    newA.innerText = 'modifier'
-    newA.addEventListener('click', () => {
-        createModuleModifier()
+    newIcon.setAttribute('class', 'fa-regular fa-pen-to-square')
+    newAnchor.setAttribute('id', 'modifyButton')
+    newAnchor.innerText = 'modifier'
+    newAnchor.addEventListener('click', () => {
+        createModuleModify()
     })
 
-    newDiv.appendChild(newI)
-    newDiv.appendChild(newA)
+    newDiv.appendChild(newIcon)
+    newDiv.appendChild(newAnchor)
     portfolioTitle.appendChild(newDiv)
 }
 
-
-// Function to show admin bar
-function printEditionHeader () {
+// Fonction pour ajouter admin bar au DOM
+function printEditionHeader() {
     const newDiv = document.createElement('div')
-    const newI = document.createElement('i')
-    const newP = document.createElement('p')
+    const newIcon = document.createElement('i')
+    const newParagraph = document.createElement('p')
 
     newDiv.setAttribute('class', 'adminHeader')
-    newI.setAttribute('class', 'fa-regular fa-pen-to-square')
-    newP.innerText = 'Mode édition'
+    newIcon.setAttribute('class', 'fa-regular fa-pen-to-square')
+    newParagraph.innerText = 'Mode édition'
 
-    newDiv.appendChild(newI)
-    newDiv.appendChild(newP)
+    newDiv.appendChild(newIcon)
+    newDiv.appendChild(newParagraph)
     homeHeader.insertBefore(newDiv, homeHeader.firstChild)
 }
 
-//function to change login to logout
-function toggleLogout () {
+//  fonction pour changer login à logout
+function toggleLogout() {
     loginMenuItem.removeChild(loginMenuItem.firstChild)
 
-    const newA = document.createElement('a')
+    const newAnchor = document.createElement('a')
 
-    newA.setAttribute('href', "/FrontEnd/index.html")
-    newA.setAttribute('id', 'logout')
-    newA.innerText = "logout"
-    newA.addEventListener('click', () => {
-        removeAdminModules()
+    newAnchor.setAttribute('href', "/FrontEnd/index.html")
+    newAnchor.setAttribute('id', 'logout')
+    newAnchor.innerText = "logout"
+    newAnchor.addEventListener('click', () => {
         sessionStorage.clear()
     })
-    loginMenuItem.appendChild(newA)
-}
-
-function toggleLogin () {
-    loginMenuItem.removeChild(loginMenuItem.firstChild)
-
-    const newA = document.createElement('a')
-
-    newA.setAttribute('href', "/FrontEnd/assets/pages/login.html")
-    newA.setAttribute('id', 'login')
-    newA.innerText = "login"
-
-    loginMenuItem.appendChild(newA)
-}
-
-// Function to remove adminHeader 
-function removeEditionHeader () {
-    const adminModule = document.getElementsByClassName('adminHeader')
-    homeHeader.removeChild(adminModule)
-}
-// function to remove gallery modifier
-function removeFilterModificator () {
-    const modifierButton = document.getElementsByClassName('modifier')
-    portfolioTitle.removeChild(modifierButton)
+    loginMenuItem.appendChild(newAnchor)
 }
