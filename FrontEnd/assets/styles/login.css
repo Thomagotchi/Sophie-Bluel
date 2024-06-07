@@ -1,5 +1,4 @@
-/* LOGIN */
-
+/* ------------------------ LOGIN ------------------------ */
 #login {
     width: fit-content;
     min-width: 379px;
@@ -9,15 +8,15 @@
     font-weight: bold;
 }
 
-button[type="submit"]{
+button[type="submit"] {
     font-size: 14px;
-	margin : 37px auto 28px auto;
-	text-align: center;
-	border-radius: 60px ;
+    margin: 37px auto 28px auto;
+    text-align: center;
+    border-radius: 60px;
 }
 
 button[type="submit"]:hover {
-   cursor: pointer;
+    cursor: pointer;
 }
 
 .mdp-oublie {
@@ -26,19 +25,18 @@ button[type="submit"]:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #000;    
+    color: #000;
     border-bottom: 1px solid #000;
 }
 
 .input-area form {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
+    text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 .mdp-oublie:hover {
     cursor: pointer;
     font-weight: bold;
 }
-
