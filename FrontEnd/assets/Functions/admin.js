@@ -1,7 +1,7 @@
 import { getAllProjects } from "./api.js"
 import { removeGalleryFilters, findFilters, createModuleModify } from "./dom.js"
 
-// Elements du DOM
+// ------------------------ VARIABLES ------------------------
 const loginMenuItem = document.getElementById('loginList')
 const portfolioTitle = document.getElementById('portfolioTitle')
 const homeHeader = document.getElementById('header')
@@ -41,6 +41,7 @@ function printFilterModify() {
     newAnchor.innerText = 'modifier'
     newAnchor.addEventListener('click', () => {
         createModuleModify()
+        document.body.style.position = 'fixed'
     })
 
     newDiv.appendChild(newIcon)

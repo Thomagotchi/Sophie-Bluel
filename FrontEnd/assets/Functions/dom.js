@@ -1,16 +1,12 @@
 import { getAllProjects, deleteProject, sendWork } from "./api.js"
 
-// ------ VARIABLES ------
-
-// Portfolio
+// ------------------------ VARIABLES ------------------------
 const portfolio = document.getElementById('portfolio')
-
-// Galleries
 const gallery = document.getElementById('gallery')
 const filterGallery = document.getElementById('filterGallery')
 
 
-// ------ MANIPULATION DU DOM  ------
+// ------------------------ MANIPULATION DU DOM  ------------------------
 
 // Fonction pour créer l'element HTML pour un projet
 function printGallery(element) {
@@ -168,10 +164,12 @@ export async function createModuleModify() {
 
     closeButton.addEventListener('click', () => {
         portfolio.removeChild(newAside)
+        document.body.style.position = ''
     })
 
     newAside.addEventListener('click', () => {
         portfolio.removeChild(newAside)
+        document.body.style.position = ''
     })
 
     modalWrapper.addEventListener('click', event => {
@@ -241,13 +239,6 @@ export function createModuleAdd() {
 
     // Titre text
     modalTitle.innerText = 'Ajout photo'
-   
-    
-    // --- CREATION DIV 'Seperator' ---
-    const seperator = document.createElement('div')
-
-    // --- Div 'seperator' attribute ---
-    seperator.setAttribute('class', 'seperator')
 
 
     // --- CREATION 'FORM' ---
@@ -257,34 +248,43 @@ export function createModuleAdd() {
     addForm.setAttribute('id', 'addForm')
 
 
-    // --- CREATION DIV INPUT DOCUMENT ---
+    // --- CREATION DOCUMENT INPUT DIVS ---
     const addFileInputDiv = document.createElement('div')
+    const addFileInputDivDefaultPreview = document.createElement('div')
 
     // Div input attribute
     addFileInputDiv.setAttribute('class', 'fileInputDiv')
+    addFileInputDivDefaultPreview.setAttribute('id', 'fileInputDivDefault')
 
 
     // --- CREATION ELEMENTS INPUT  ---
+    const addFileInputImgPreview = document.createElement('img')
     const addFileInputIcon = document.createElement('icon')
     const addFileInputLabel = document.createElement('label')
-    const addFileInputButton = document.createElement('button')
+    const addFileInputLabelImg = document.createElement('label')
     const addFileInputInfo = document.createElement('p')
     const addFileInput = document.createElement('input')
 
     // Input elements attributes
-    
+    addFileInputImgPreview.setAttribute('id', 'imgPreview')
+    addFileInputImgPreview.setAttribute('src', '#')
+    addFileInputImgPreview.setAttribute('alt', 'Votre image')
+    addFileInputImgPreview.setAttribute('for', 'addFileInput')
     addFileInputIcon.setAttribute('class', 'fa-regular fa-image fa-5x')
     addFileInputIcon.setAttribute('id', 'addFileInputIcon')
     addFileInputLabel.setAttribute('for', 'addFileInput')
     addFileInputLabel.setAttribute('class', 'addFileInputLabel')
+    addFileInputLabelImg.setAttribute('id', 'addFileInputLabelImg')
+    addFileInputLabelImg.setAttribute('for', 'addFileInput')
+    addFileInputLabelImg.setAttribute('class', 'hidden')
     addFileInputLabel.innerText = "+ Ajouter photo"
-    addFileInputButton.setAttribute('id', 'addFileInputButton')
-    addFileInputButton.innerText = '+ Ajouter photo'
     addFileInputInfo.innerText = 'jpg, png: 4mo max'
     addFileInput.setAttribute('id', 'addFileInput')
     addFileInput.setAttribute('name', 'image')
     addFileInput.setAttribute('type', 'file')
+    addFileInput.setAttribute('accept', '.jpg, .jpeg, .png')
 
+    
     // --- CREATION TITRE 'FORM' ---
     const addFileTitleLabel = document.createElement('label')
     const addFileTitle = document.createElement('input')
@@ -317,7 +317,14 @@ export function createModuleAdd() {
     addFileSelectCat3.setAttribute('value', 3)
     addFileSelectCat3.innerText = 'Hotels & restaurants'
 
-    
+
+    // --- CREATION DIV 'Seperator' ---
+    const seperator = document.createElement('div')
+
+    // --- Div 'seperator' attribute ---
+    seperator.setAttribute('class', 'seperator')
+
+
     // --- CREATION DU BOUTON SUBMIT  ---
     const submitButton = document.createElement('button')
 
@@ -332,24 +339,17 @@ export function createModuleAdd() {
     // --- EVENT LISTENERS ---
     addForm.addEventListener('submit', (event) => {
         event.preventDefault()
-        const formData = new FormData(addForm)
-
-        // Send work to backend and refresh portfolio gallery
-        sendWork(formData)
-
-        // Resets inputs in case of  bad request
-        resetInput(addFileInput)
-        resetInput(addFileTitle)
-        resetInput(addFileCategorySelect)
     })
 
     backIcon.addEventListener('click', () => {
         portfolio.removeChild(newAside)
         createModuleModify()
+        document.body.style.position = 'fixed'
     })
 
     closeButton.addEventListener('click', () => {
         portfolio.removeChild(newAside)
+        document.body.style.position = ''
     })
 
     modalWrapper.addEventListener('click', event => {
@@ -358,7 +358,64 @@ export function createModuleAdd() {
 
     newAside.addEventListener('click', () => {
         portfolio.removeChild(newAside)
+        document.body.style.position = ''
     })
+
+    addFileInput.onchange = function() {
+        const [inputImage] = addFileInput.files
+        // Limiteur pour taille du fichier
+        if([inputImage].size > 4194304) {
+            alert("Fichier est trop gros!")
+            addFileInput.value = ""
+        }
+
+        // Affichage de l'image à envoyer
+        if (inputImage) {
+            addFileInputDivDefaultPreview.setAttribute('class', 'hidden')
+            addFileInputLabelImg.removeAttribute('class')
+            addFileInputImgPreview.src = URL.createObjectURL(inputImage)
+        }
+        checkSend()
+    }
+
+    addFileTitle.addEventListener('change', () => checkSend()) 
+
+    addFileCategorySelect.addEventListener('change', () => checkSend())
+
+    function checkSend() {
+        if( addFileCategorySelect.value != "" && addFileInput.value != "" && addFileTitle.value != "" ) {
+            console.log('u can send')
+            console.log(addFileCategorySelect.value)
+            console.log(addFileInput.value)
+            console.log(addFileTitle.value)
+            submitButton.removeAttribute('class')
+
+            addForm.addEventListener('submit', sendWorkEvent)
+
+        } else {
+            addForm.removeEventListener('submit', sendWorkEvent)
+            submitButton.setAttribute('class', 'inactive')
+        }
+    }
+
+    function sendWorkEvent(event) {
+        event.preventDefault()
+                const formData = new FormData(addForm)
+        
+                // Send work to backend and refresh portfolio gallery
+                sendWork(formData)
+        
+                // Resets inputs in case of  bad request
+                resetInput(addFileInput)
+                resetInput(addFileTitle)
+                resetInput(addFileCategorySelect)
+
+                addFileInputDivDefaultPreview.removeAttribute('class')
+                addFileInputLabelImg.setAttribute('class', 'hidden')
+
+                submitButton.setAttribute('class', 'inactive')
+    }
+
 
     // --- AJOUT DES ELEMENTS AU DOM ---
     backButton.appendChild(backIcon)
@@ -366,9 +423,13 @@ export function createModuleAdd() {
     actionButtons.appendChild(backButton)
     actionButtons.appendChild(closeButton)
 
-    addFileInputDiv.appendChild(addFileInputIcon)
-    addFileInputDiv.appendChild(addFileInputLabel)
-    addFileInputDiv.appendChild(addFileInputInfo)
+    addFileInputDivDefaultPreview.appendChild(addFileInputIcon)
+    addFileInputDivDefaultPreview.appendChild(addFileInputLabel)
+    addFileInputDivDefaultPreview.appendChild(addFileInputInfo)
+    addFileInputLabelImg.appendChild(addFileInputImgPreview)
+    addFileInputDiv.appendChild(addFileInputDivDefaultPreview)
+    addFileInputDiv.appendChild(addFileInputLabelImg)
+
 
     addFileCategorySelect.appendChild(addFileSelectCat0)
     addFileCategorySelect.appendChild(addFileSelectCat1)
@@ -446,7 +507,7 @@ export function printAllWorksToModule (elements, dom) {
     }
 }
 
-// ------ EVENT LISTENERS ------
+// ------------------------ EVENT LISTENERS ------------------------
 
 // Event listeners des filtres
 document.getElementById("filterGallery").addEventListener("click", (event) => {
@@ -499,7 +560,7 @@ document.getElementById("filterGallery").addEventListener("click", (event) => {
 })
 
 
-// ------ FONCTIONS ------
+// ------------------------ FONCTIONS ------------------------
 
 // Activé un filtre
 export function toggleActive(element) {
@@ -515,11 +576,7 @@ export function toggleInactive(element) {
     } 
 }
 
-// Fonction pour vidé input
+// Fonction pour vider input
 export function resetInput(inputValue) {
     inputValue.value = null
-}
-
-function printIncomplete() {
-    console.log(`Impossible de charger l'image, information manquantes.`)
 }

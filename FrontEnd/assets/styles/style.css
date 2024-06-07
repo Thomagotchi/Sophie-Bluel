@@ -191,24 +191,7 @@ li a:hover {
 	margin: 2em 0 1em 0;
 }
 
-button[type="submit"]{
-    border: none;
-    font-size: 14px;
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154 !important;
-	margin : 45px auto;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-    height: 36px;
-    box-shadow: none;
-}
 
-button[type="submit"]:hover {
-    cursor:pointer;
-}
 
 .footer {
     display: flex;
@@ -254,4 +237,8 @@ textarea {
 
 input:focus, textarea:focus {
     outline: none;
+}
+
+.hidden {
+	display: none!important;
 }

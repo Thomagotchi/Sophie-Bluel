@@ -1,3 +1,4 @@
+// ------------------------ VARIABLES ------------------------
 const loginForm = document.getElementById("login-form")
 const loginEmailInput = document.getElementById("email")
 const loginPasswordInput = document.getElementById("password")
