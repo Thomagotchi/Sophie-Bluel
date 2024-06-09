@@ -580,3 +580,15 @@ export function toggleInactive(element) {
 export function resetInput(inputValue) {
     inputValue.value = null
 }
+
+// Permet de scroll une fois que le contenue est charger avec un Timeout 
+export function moveToHash() {
+    let urlHash = window.location.hash;
+  
+    if (urlHash) {
+      setTimeout(() => {
+        window.location.hash = '';
+        window.location.hash = urlHash;
+      }, 50) 
+    }
+  }

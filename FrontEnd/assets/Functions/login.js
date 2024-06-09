@@ -17,11 +17,18 @@ loginForm.addEventListener('submit', event => {
             body: JSON.stringify(loginData)
         })
         .then(res => {
+            if (res.status === 401) {
+                loginEmailInput.value = ""
+                loginPasswordInput.value = ""
+                window.alert(`Erreur dans l’identifiant ou le mot de passe`)
+                throw Error(`Erreur dans l’identifiant ou le mot de passe`)
+                }
             if (res.status === 404) {
                 loginEmailInput.value = ""
                 loginPasswordInput.value = ""
-                throw Error('404, user not found'
-                )}
+                window.alert(`Erreur dans l’identifiant ou le mot de passe`)
+                throw Error(`Erreur dans l’identifiant ou le mot de passe`)
+                }
             if(res.ok) {
                 return res.json() 
                 .then(data => {

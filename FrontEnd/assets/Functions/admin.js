@@ -15,7 +15,6 @@ export async function verificationAdmin() {
     } else {
         getAllProjects()
             .then(body => findFilters(body))
-            .catch(console.log('Pas trouver de categories'))
     }
 }
 

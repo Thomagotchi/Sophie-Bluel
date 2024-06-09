@@ -8,18 +8,33 @@
     font-weight: bold;
 }
 
+.boutonSubmit {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    gap: 28px;
+}
+
 button[type="submit"] {
     font-size: 14px;
-    margin: 37px auto 28px auto;
-    text-align: center;
+    margin: 0 auto 0 auto;
     border-radius: 60px;
+    border: none;
+	font-size: 14px;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	width: 180px;
+    height: 36px;
 }
 
 button[type="submit"]:hover {
     cursor: pointer;
 }
 
-.mdp-oublie {
+.mdpOublie {
     margin: 0 auto;
     width: fit-content;
     display: flex;
@@ -29,6 +44,10 @@ button[type="submit"]:hover {
     border-bottom: 1px solid #000;
 }
 
+.input-area #password {
+    margin: 0 0 37px 0;
+}
+
 .input-area form {
     text-align: left;
     margin-top: 30px;
@@ -36,7 +55,7 @@ button[type="submit"]:hover {
     flex-direction: column;
 }
 
-.mdp-oublie:hover {
+.mdpOublie:hover {
     cursor: pointer;
     font-weight: bold;
 }
